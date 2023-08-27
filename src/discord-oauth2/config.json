@@ -1,0 +1,6 @@
+{
+    "CLIENT_ID": "1141920031484166204",
+    "CLIENT_SECRET": "IilnROID9Pt3vbZmxOJunEf4y5CkFi9-",
+    "REDIRECT_URI": "https://bio-azob.onrender.com/api/callback",
+    "PORT": 3000
+}
