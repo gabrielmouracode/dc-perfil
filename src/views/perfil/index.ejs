@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manoterror</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/perfil/css/styles-perfil.css">
+</head>
+<body class="bg-black">
+    <div class="container-fluid banner p-0">
+        <img src="<%= customize.banner %>" alt="Banner" onerror="this.src='/assets/images/banner.png'; this.onerror=null;">
+    </div>
+    <div class="w-100 d-flex flex-column align-items-center">
+        <div class=" d-flex flex-column align-items-center user p-2 mb-5">
+            <img src="<%= customize.avatar %>" onerror="this.src='/assets/images/avatar.png'; this.onerror=null;">
+            <span class="my-3 text-white username"><%= info.name %></span>
+            <p class="user-bio"><%= info.bio %></p>
+            <div class="d-flex justify-content-center align-items-center user-social">  
+                <% if (social.instagram) { %>
+                    <a href="https://www.instagram.com/<%= social.instagram %>" style="color: #fd00c3;" target="_blank"><i class="bi bi-instagram"></i></a>
+                <% } if (social.twitter) { %>
+                    <a href="https://twitter.com/<%= social.twitter %>" style="color: #1d9bf0;" target="_blank"><i class="bi bi-twitter"></i></a>
+                <% } if (social.youtube) { %> 
+                    <a href="https://www.youtube.com/@<%= social.youtube %>" style="color: red;" target="_blank"><i class="bi bi-youtube"></i></a>
+                <% } if (social.tiktok) { %> 
+                    <a href="https://www.tiktok.com/@<%= social.tiktok %>" style="color: white;" target="_blank"><i class="bi bi-tiktok"></i></a>
+                <% } if (social.github) { %> 
+                    <a href="https://github.com/<%= social.github %>" style="color: white;" target="_blank"><i class="bi bi-github"></i></a>
+                <% } if (social.telegram) { %> 
+                    <a href="https://t.me/<%= social.telegram %>" style="color: #35ade1;" target="_blank"><i class="bi bi-telegram"></i></a>
+                <% } %>
+            </div>
+            <div class="w-100 mb-5">
+                <% for (let i = 0; i < links.length; i++) { %>
+                    <a href="<%= links[i].name %>" class="w-100 nav-link d-flex justify-content-center" target="_blank">
+                        <div class="links my-3">
+                        <div class="links-icon">
+                            <i class="bi bi-link-45deg"></i>
+                        </div>
+                        <div class="links-info">
+                            <p style="color: #a1a1aa;"><%= links[i].name %></p>
+                            <p style="color: #3f3f46;"><%= links[i].url %></p>
+                        </div>
+                        <span style="color: #3f3f46;">></span>
+                        </div>
+                    </a>
+                <% } %>               
+            </div>
+            
+            
+        </div>
+    </div>
+    
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/perfil/js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/home/css/styles-home.css">
+</head>
+<body class="bg-black text-white" daa>
+    <header class="bg-black">
+        <nav class="navbar">
+            <div class="container-fluid">
+              <a class="navbar-brand text-white">Navbar</a>
+              <form class="d-flex" role="search">
+                <% if (user) { %>
+                    <div class="flex-shrink-0 dropdown">
+                        <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle text-white" data-bs-toggle="dropdown" aria-expanded="true">
+                          <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" alt="mdo" width="32" height="32" class="rounded-circle" onerror="this.src='/assets/images/avatar.png'; this.onerror=null;">
+                        </a>
+                        <ul class="dropdown-menu text-small shadow bg-black " style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(0px, 34.4px, 0px);" data-popper-placement="bottom-end">
+                          <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+                          <li><a class="dropdown-item" href="/api/logout">Sign out</a></li>
+                        </ul>
+                      </div>
+                <% } else { %>
+                    <a href="https://discord.com/api/oauth2/authorize?client_id=1141920031484166204&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fcallback&response_type=code&scope=identify%20guilds%20guilds.join" class="btn bg-primary text-white">Register / Login</a>
+                <% } %>
+              </form>
+            </div>
+            
+        </nav>
+    </header>    
+    <main>
+        <div class="background">
+            <div class="faixa-background-1"></div>
+            <div class="faixa-background-2"></div>
+            <div class="faixa-background-3"></div>
+        </div>
+        <div class="container-custom">
+            <div class="my-5">
+                <h1>Não desperdice seu tempo, desenvolva um perfil personalizado.</h1>
+                <p class="my-5">Crie um hub central para reunir todas as suas redes sociais em um só lugar! Direcione seus seguidores para um espaço único, sem distrações, onde podem se conectar com você em todas as plataformas. Simplifique sua presença online e deixe que suas redes sociais brilhem.</p>
+                <a href="/dashboard" class="btn bg-primary text-white">Dashboard</a>
+            </div>
+        </div>    
+    </main>
+    <script src="/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="/assets/bootstrap/js/bootstrap.min.js"></script> -->
+</body>
+</html>
