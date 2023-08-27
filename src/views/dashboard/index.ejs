@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dashboard</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/bootstrap/icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/dashboard/css/styles-dashboard.css">
+    
+</head>
+<body class="bg-black text-white" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg ">
+        <div class="container-fluid">
+          <a class="navbar-brand text-white" href="/">Navbar</a>
+          <div class="d-flex">
+            
+            <a class="nav-link" href="<%= info.url ? `/${info.url}` : "/dashboard" %>" role="button" aria-expanded="false">Ver Perfil</a>
+          </div>
+          
+        </div>
+      </nav>
+    <main>
+        <div class="custom-container mt-5">       
+            <div class="card bg-black text-white">
+                <nav class="navbar navbar-expand-lg">
+                    <div class="container-fluid">
+                      <div class="navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                          <a class="nav-link active" aria-current="page" href="#" onclick="openTab('info')">Info</a>
+                          <a class="nav-link" href="#" onclick="openTab('customize')">Customize</a>
+                          <a class="nav-link" href="#" onclick="openTab('links')">Links</a>
+                          <a class="nav-link" href="#" onclick="openTab('socials')">Socials</a>
+                        </div>
+                      </div>
+                    </div>
+                  </nav>
+              <div class="card-body">
+                <form class="form active" id="info">
+                  <div class="mb-3">
+                    <label for="name" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="username" name="name" placeholder="Digite seu nome" value="<%= info.name %>">
+                  </div>
+                  <div class="mb-3 input-with-icon">
+                    <label for="url" class="form-label">URL</label>
+                    <div class="input-group">             
+                      <span class="input-group-text input-icon">ayo.so/</span>
+                      <input type="url" class="form-control" id="perfilurl" name="perfilurl" placeholder="<%= info.url ? `${info.url}` : "Digite a URL" %>" <%= info.url ? 'disabled' : 'required' %>>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="bio" class="form-label">Bio</label>
+                    <textarea class="form-control" id="bio" name="bio" rows="4" placeholder="Digite sua bio" maxlength="200"><%= info.bio %></textarea>
+                  </div>
+                  <button type="button" class="btn btn-primary w-100" onclick="saveInfo()">Salva Alterações</button>
+                </form>
+                <form class="form" id="customize">
+                    <div class="mb-3 d-flex justify-content-between">
+                        <div class="col-9">
+                            <label for="name" class="form-label">Avatar</label>
+                            <input type="url" class="form-control" id="urlavatar" name="avatar" placeholder="Avatar URL" value="<%= customize.avatar %>">
+                        </div>
+                        <img src="<%= customize.avatar %>" alt="" class="col-2 rounded-circle">
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Banner</label>
+                        <input type="url" class="form-control" id="urlbanner" name="banner" placeholder="Banner URL" value="<%= customize.banner %>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="cor" class="form-label">Cor de Fundo</label>
+                        <input type="color" class="form-control" id="cor-bg" name="cor" data-color-format="rgba">
+                    </div>
+                    <div class="mb-3">
+                        <label for="cor" class="form-label">Cor de Texto</label>
+                        <input type="color" class="form-control" id="cor-text" name="cor" data-color-format="rgba">
+                    </div>
+                    <button type="button" class="btn btn-primary w-100" onclick="saveCustomize()">Salva Alterações</button>    
+                </form>
+                <form class="form" id="links">
+                    <h4 class="card-title">Links</h4>
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Add Link</button>   
+                    </div>
+                    <div class="mb-3" id="links">
+                        <% for (let i = 0; i < links.length; i++) { %>
+                            <div class="links d-flex justify-content-between bg-body-tertiary mb-3"><div class="links-icon bg-primary"><i class="bi bi-link-45deg icon-medium"></i></div><div class="d-flex flex-column justify-content-center px-2 links-conteudo"><p class="m-0" id="nameLinksform"><%= links[i].name %></p><p class="m-0" id="urlLinksform"><%= links[i].url %></p></div><div class="links-option bg-danger"><i class="bi bi-trash-fill icon-medium"></i></div></div>
+                        <% } %>
+                    </div>
+                </form>
+                <form class="form" id="socials">
+                    <h4 class="card-title">Links</h4>
+                    <div class="d-flex my-3">
+                        <div class="col-6 pe-1">
+                            <div class="input-group">
+                                <i class="bi bi-instagram input-group-text input-icon"></i>             
+                                <input type="url" class="form-control" id="urlinstagram" name="url" placeholder="Instagram" value="<%= social.instagram %>">
+                            </div>
+                        </div>
+                        <div class="col-6 ps-1">
+                            <div class="input-group">
+                                <i class="bi bi-twitter input-group-text input-icon"></i>             
+                                <input type="url" class="form-control" id="urltwitter" name="url" placeholder="Twitter" value="<%= social.twitter %>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex my-3">
+                        <div class="col-6 pe-1">
+                            <div class="input-group">
+                                <i class="bi bi-youtube input-group-text input-icon"></i>             
+                                <input type="url" class="form-control" id="urlyoutube" name="url" placeholder="YouTube" value="<%= social.youtube %>">
+                            </div>
+                        </div>
+                        <div class="col-6 ps-1">
+                            <div class="input-group">
+                                <i class="bi bi-tiktok input-group-text input-icon"></i>             
+                                <input type="url" class="form-control" id="urltiktok" name="url" placeholder="TikTok" value="<%= social.tiktok %>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex my-3">
+                        <div class="col-6 pe-1">
+                            <div class="input-group">
+                                <i class="bi bi-github input-group-text input-icon"></i>             
+                                <input type="url" class="form-control" id="urlgithub" name="url" placeholder="GitHub" value="<%= social.github %>">
+                            </div>
+                        </div>
+                        <div class="col-6 ps-1">
+                            <div class="input-group">
+                                <i class="bi bi-telegram input-group-text input-icon"></i>             
+                                <input type="url" class="form-control" id="urltelegram" name="url" placeholder="Telegram" value="<%= social.telegram %>">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="button" class="btn btn-primary w-100" onclick="saveSocial()">Salva Alterações</button>
+                </form>
+              </div>
+            </div>
+        </div>
+    </main>
+    
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nome</label>
+                    <input type="url" class="form-control" id="nome-url" name="nome-url" placeholder="Digite o Nome">
+                </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Banner</label>
+                    <input type="url" class="form-control" id="links-url" name="links-url" placeholder="Digite a URL">
+                </div>
+            </div>
+            <div class="modal-footer">      
+                <button type="button" class="btn btn-primary w-100" id="addlink">Add Link</button>   
+                <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Fechar</button>       
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/dashboard/js/index.js"></script>
+</body>
+</html>
+
+<!-- <div class="w-100 links d-flex justify-content-between bg-body-tertiary mb-3">
+    <div class="links-icon bg-primary">
+        <i class="bi bi-link-45deg icon-medium"></i>
+    </div>
+    <div class="d-flex flex-column justify-content-center px-2 links-conteudo">
+        <p class="m-0">Discord</p>
+        <p class="m-0">https://discord.gg/aimlocktrem</p>
+    </div>
+    <div class="links-option bg-danger">
+        <i class="bi bi-trash-fill icon-medium"></i>
+    </div>
+</div> -->
