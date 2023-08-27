@@ -4,8 +4,8 @@ const axios = require('axios');
 
 // dotenv
 require('dotenv').config({ path: path.join(__dirname, '../authentication', '.env') });
-const { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, PORT } = process.env
-
+const { CLIENT_ID, CLIENT_SECRET, PORT } = process.env
+const REDIRECT_URI = "https://bio-z2fu.onrender.com";
 async function getUser(CODE){
     try {
         const code = CODE.toString();
